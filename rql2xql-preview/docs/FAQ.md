@@ -50,4 +50,4 @@ library, all of which took many validation rounds against real tenants to build.
 methodology is public so the results can be judged; the implementation is licensed.
 
 **Can my team get it?**
-See [ACCESS.md](../ACCESS.md).
+See [ACCESS.md](../../ACCESS.md).

@@ -60,4 +60,4 @@ reformatting, and `exceptions --collect` can use it as the rules workbook for
 policy → rule resolution.
 
 **Can my team get it?**
-See [ACCESS.md](../ACCESS.md).
+See [ACCESS.md](../../ACCESS.md).

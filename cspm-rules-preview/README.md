@@ -94,7 +94,7 @@ withdrawn per release.
 | [docs/SAMPLE_RULES/](docs/SAMPLE_RULES/) | Complete entries in library format |
 | [docs/FORMAT.md](docs/FORMAT.md) | The entry schema |
 | [docs/FAQ.md](docs/FAQ.md) | Provenance, coverage gaps, licensing |
-| [ACCESS.md](ACCESS.md) | How to get the full library |
+| [ACCESS.md](../ACCESS.md) | How to get the full library |
 
 
 ---
@@ -103,7 +103,7 @@ withdrawn per release.
 
 This tooling was built in the course of Palo Alto Networks Professional Services
 engagements and is made available to organisations working with me on a Cortex Cloud
-deployment or migration. See [ACCESS.md](ACCESS.md).
+deployment or migration. See [ACCESS.md](../ACCESS.md).
 
 ## Related previews
 

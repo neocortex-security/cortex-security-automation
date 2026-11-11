@@ -42,4 +42,4 @@ Yes; the workbook filters by cloud and family, and licensing is for the library 
 whole.
 
 **Can my team get it?**
-See [ACCESS.md](../ACCESS.md).
+See [ACCESS.md](../../ACCESS.md).

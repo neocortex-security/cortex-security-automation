@@ -57,4 +57,4 @@ An **Advanced** key with Issues read, Cases read/write, Endpoints read, Audit Lo
 read, Assets read, Asset Groups read.
 
 **Can my team get it?**
-See [ACCESS.md](../ACCESS.md).
+See [ACCESS.md](../../ACCESS.md).

@@ -88,7 +88,7 @@ and component mapping in [docs/AWS-OPENSEARCH.md](docs/AWS-OPENSEARCH.md).
 | [docs/COST.md](docs/COST.md) | Ingestion and storage cost by estate size, both platforms |
 | [docs/FAQ.md](docs/FAQ.md) | Scope, limits, upgrade path |
 | [docs/img/](docs/img/) | Workbook and dashboard screenshots (lab tenant) |
-| [ACCESS.md](ACCESS.md) | How to get the solution |
+| [ACCESS.md](../ACCESS.md) | How to get the solution |
 
 ## What is **not** in this repository
 
@@ -103,18 +103,18 @@ import script, analytics rules, playbooks, the deployment guides and test plans.
 
 This tooling was built in the course of Palo Alto Networks Professional Services
 engagements and is made available to organisations working with me on a Cortex Cloud
-deployment or migration. See [ACCESS.md](ACCESS.md).
+deployment or migration. See [ACCESS.md](../ACCESS.md).
 
 ## Related previews
 
 | Repo | What it is |
 |---|---|
-| [rql2xql-preview](https://github.com/neocortex-security/cortex-security-automation/rql2xql-preview) | Prisma Cloud RQL → Cortex Cloud XQL translator with live validation |
-| [cspm-rules-manager-preview](https://github.com/neocortex-security/cortex-security-automation/cspm-rules-manager-preview) | One CLI to collect, update and create Prisma policies, Cortex rules and AppSec rules |
-| [cspm-rules-preview](https://github.com/neocortex-security/cortex-security-automation/cspm-rules-preview) | Consolidated, validated CSPM rule library for Cortex Cloud |
-| [cortex-cloud-terraform-preview](https://github.com/neocortex-security/cortex-security-automation/cortex-cloud-terraform-preview) | Cortex Cloud tenant provisioning as code |
-| [prisma-asset-reporter-preview](https://github.com/neocortex-security/cortex-security-automation/prisma-asset-reporter-preview) | Per-asset compliance findings and vulnerabilities from Prisma Cloud, cross-cloud, by asset type or custom RQL |
-| [cortexcloud-sentinel-preview](https://github.com/neocortex-security/cortex-security-automation/cortexcloud-sentinel-preview) | Microsoft Sentinel → AWS (OpenSearch + Grafana) data pipeline |
+| [rql2xql-preview](https://github.com/neocortex-security/cortex-security-automation/tree/main/rql2xql-preview) | Prisma Cloud RQL → Cortex Cloud XQL translator with live validation |
+| [cspm-rules-manager-preview](https://github.com/neocortex-security/cortex-security-automation/tree/main/cspm-rules-manager-preview) | One CLI to collect, update and create Prisma policies, Cortex rules and AppSec rules |
+| [cspm-rules-preview](https://github.com/neocortex-security/cortex-security-automation/tree/main/cspm-rules-preview) | Consolidated, validated CSPM rule library for Cortex Cloud |
+| [cortex-cloud-terraform-preview](https://github.com/neocortex-security/cortex-security-automation/tree/main/cortex-cloud-terraform-preview) | Cortex Cloud tenant provisioning as code |
+| [prisma-asset-reporter-preview](https://github.com/neocortex-security/cortex-security-automation/tree/main/prisma-asset-reporter-preview) | Per-asset compliance findings and vulnerabilities from Prisma Cloud, cross-cloud, by asset type or custom RQL |
+| [cortexcloud-sentinel-preview](https://github.com/neocortex-security/cortex-security-automation/tree/main/cortexcloud-sentinel-preview) | Microsoft Sentinel → AWS (OpenSearch + Grafana) data pipeline |
 
 ---
 

@@ -35,5 +35,5 @@ Yes; each is independent. `rules` alone is the common case for teams that onboar
 hand but want rule enablement under version control.
 
 **Can my team get it?**
-See [ACCESS.md](../ACCESS.md). Delivery is as a private Git module source pinned by
+See [ACCESS.md](../../ACCESS.md). Delivery is as a private Git module source pinned by
 tag.

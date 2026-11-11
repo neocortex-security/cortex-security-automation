@@ -57,4 +57,4 @@ Cloud API. The output contains your estate's findings and software inventory —
 it accordingly.
 
 **Can my team get it?**
-See [ACCESS.md](../ACCESS.md).
+See [ACCESS.md](../../ACCESS.md).
