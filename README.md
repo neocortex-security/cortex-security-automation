@@ -20,9 +20,9 @@ documentation in a private repository.
 |---|---|---|
 | [**rql2xql**](rql2xql-preview/) | Translates Prisma Cloud RQL policies to Cortex Cloud XQL and **validates every translation against live tenants** — populations, not counts — with every disagreement classified | 2.32.x, production on <<N>> client corpora |
 | [**cspm-rules-manager**](cspm-rules-manager-preview/) | One binary to export, create, update and map Prisma policies, Cortex rules, custom compliance standards and AppSec IaC rules from reviewed workbooks; carries alert exceptions over to issue exceptions | 1.1.x |
-| [**cspm-rules**](cspm-rules-preview/) | A consolidated, validated library of Cortex Cloud posture and correlation rules — the long tail of custom controls that default rule sets do not cover | <<N>> rules |
-| [**cortex-cloud-terraform**](cortex-cloud-terraform-preview/) | Cortex Cloud tenant provisioning as code: onboarding, asset groups, standards, rules, exceptions, integrations — idempotent, with drift detection | v<<X.Y>> |
-| [**prisma_asset_reporter**](prisma-asset-reporter-preview/) | Per-asset compliance findings and vulnerabilities from Prisma Cloud across 13 asset types and every cloud, at scale, exported anywhere Polars can write | <<X.Y>> |
+| [**cspm-rules**](cspm-rules-preview/) | A consolidated, validated library of Cortex Cloud posture and correlation rules — the long tail of custom controls that default rule sets do not cover | 1000+ rules |
+| [**cortex-cloud-terraform**](cortex-cloud-terraform-preview/) | Cortex Cloud tenant provisioning as code: onboarding, asset groups, standards, rules, exceptions, integrations — idempotent, with drift detection | v3.3 |
+| [**prisma_asset_reporter**](prisma-asset-reporter-preview/) | Per-asset compliance findings and vulnerabilities from Prisma Cloud across 13 asset types and every cloud, at scale, exported anywhere Polars can write | v1.3 |
 | [**cortexcloud-sentinel**](cortexcloud-sentinel-preview/) | Cortex Cloud in your SIEM: a Microsoft Sentinel solution (20 tables, 30 workbooks, bidirectional case playbooks) and its AWS OpenSearch + Grafana counterpart | Sentinel v7.0 · AWS v1.0 |
 
 ## How they fit together
