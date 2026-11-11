@@ -1,0 +1,21 @@
+name: Question
+description: Ask about capability, scope or approach
+title: "[Q] <short question>"
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Check [docs/FAQ.md](../blob/main/docs/FAQ.md) first. This form is public —
+        do not include credentials, tenant hostnames or account IDs.
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+    validations:
+      required: true
+  - type: input
+    id: context
+    attributes:
+      label: Context
+      placeholder: e.g. "Azure-heavy estate, ~1 200 custom policies, migrating Q2"

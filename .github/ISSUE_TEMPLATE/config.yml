@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Access and licensing
+    url: https://github.com/neocortex-security/cortex-security-automation/blob/main/ACCESS.md
+    about: How the full tooling is made available

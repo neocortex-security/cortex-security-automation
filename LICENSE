@@ -1,0 +1,28 @@
+Copyright (c) 2026 Cloudsk8s Ltd. All rights reserved.
+
+PREVIEW DOCUMENTATION LICENCE
+
+1. Scope. This licence covers the documentation, diagrams, sample output and other
+   materials in this repository ("the Materials"). It does not cover the software the
+   Materials describe, which is licensed separately to authorised organisations.
+
+2. Permitted use. You may view the Materials and reproduce short excerpts for the
+   purpose of evaluating whether to request access to the software, or for citation
+   with attribution and a link to this repository.
+
+3. Restrictions. Except as permitted above, you may not copy, redistribute, modify,
+   translate, create derivative works from, or use the Materials to build, train or
+   document a competing product or service, without prior written permission.
+
+4. No software licence. Nothing in this repository grants any right to use, copy or
+   distribute the software described, nor any right under any patent or trademark.
+
+5. Trademarks. Palo Alto Networks, Prisma Cloud, Cortex, Cortex Cloud, Cortex XDR and
+   Cortex XSIAM are trademarks of Palo Alto Networks, Inc. Amazon Web Services, Microsoft
+   Azure, Google Cloud, Oracle Cloud, Terraform, Grafana and OpenSearch are trademarks of
+   their respective owners. Use of these names is nominative and does not imply
+   endorsement or affiliation.
+
+6. No warranty. The Materials are provided "as is", without warranty of any kind.
+   Figures and results describe specific engagements at specific dates and are not a
+   guarantee of results in other environments.

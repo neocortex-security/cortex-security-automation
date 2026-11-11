@@ -1,0 +1,65 @@
+name: Access request
+description: Request access to the full tooling (private repository and binaries)
+title: "[Access] <organisation> — <tool>"
+labels: ["access-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please read [ACCESS.md](../blob/main/ACCESS.md) first. This form is public —
+        do **not** include credentials, tenant hostnames or account IDs.
+  - type: input
+    id: org
+    attributes:
+      label: Organisation
+    validations:
+      required: true
+  - type: input
+    id: role
+    attributes:
+      label: Your role
+    validations:
+      required: true
+  - type: dropdown
+    id: context
+    attributes:
+      label: Engagement context
+      options:
+        - Prisma Cloud → Cortex Cloud migration
+        - New Cortex Cloud deployment
+        - Microsoft Sentinel → AWS / Cortex data migration
+        - Evaluation / other (describe below)
+    validations:
+      required: true
+  - type: checkboxes
+    id: tools
+    attributes:
+      label: Tools requested
+      options:
+        - label: rql2xql
+        - label: cspm-rules-manager
+        - label: cspm-rules (consolidated rule library)
+        - label: Cortex Cloud Terraform provisioning
+        - label: prisma_asset_reporter
+        - label: Cortexcloud-sentinel
+  - type: input
+    id: github
+    attributes:
+      label: GitHub usernames to grant
+      placeholder: user1, user2
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Binary platform (if applicable)
+      multiple: true
+      options:
+        - macOS arm64
+        - Linux x86_64
+        - Not needed — source only
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else
+      description: Timeline, scale (rough number of policies / accounts), constraints.

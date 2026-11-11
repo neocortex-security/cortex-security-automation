@@ -1,0 +1,9 @@
+# local-only working files — never in the public tree
+PRIVATE-BOUNDARY.md
+00-PUBLISHING-CHECKLIST.md
+_shared/
+org-profile/
+*.old/
+ai-skills/
+.DS_Store
+.*.bak.*
