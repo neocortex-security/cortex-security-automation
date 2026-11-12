@@ -118,15 +118,15 @@ critical cases.
 ## Screenshots
 
 ### Executive Overview
-![](img/wb-01-executive-overview.png)
+<!-- TODO add file, then uncomment: ![](img/wb-01-executive-overview.png) -->
 
 ### Vulnerability Management
-![](img/wb-05-vulnerability-management.png)
+<!-- TODO add file, then uncomment: ![](img/wb-05-vulnerability-management.png) -->
 
 ### Compute inventory
-![](img/wb-inventory-compute.png)
+<!-- TODO add file, then uncomment: ![](img/wb-inventory-compute.png) -->
 
 ### Data Ingestion Monitor
-![](img/wb-data-ingestion-monitor.png)
+<!-- TODO add file, then uncomment: ![](img/wb-data-ingestion-monitor.png) -->
 
 <!-- one per persona dashboard at minimum; lab tenant, org/subscription names cropped -->
