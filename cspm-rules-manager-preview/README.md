@@ -43,15 +43,13 @@ Run any subcommand without an action flag for a numbered menu.
 
 ## Results
 
-<!-- Replace with dated figures; no client names. -->
+Measured in November 2026 on lab tenants (Cortex Cloud 2.2 and 2.3).
 
 | Task | Scale | Time |
 |---|---|---|
-| Collect a custom standard's Cortex rules with mapping, one tenant | <<N>> rules | <<N>> min |
-| Create + map rules from a reviewed workbook, XQL validated first | <<N>> rules | <<N>> min, zero console edits |
-| Create a custom compliance standard and its controls from the template | <<N>> controls | <<N>> min |
-| Alert exceptions → issue exceptions, lab migration | <<20>> rule-account groups | <<N>> runs across the tenant quota; ~10 s per exception once lifted |
-| Rule test pipeline, full run | <<N>> rules | <<N>> min |
+| Collect a custom standard's Cortex rules with mapping, one tenant | 4,653 rules (2,633 CSPM, plus IaC, secrets and CI/CD) | about 2 min |
+| Create a custom compliance standard and its controls from the template | 65 controls in 31 new categories | 2-4 min |
+| Alert exceptions → issue exceptions, lab migration | 39 dismissed alerts in 20 rule-account groups | 2 runs a day apart (the tenant allows 10 creations per rolling 24 h); ~10 s per exception, 10 in 3.7 min |
 
 ## Where it fits
 
