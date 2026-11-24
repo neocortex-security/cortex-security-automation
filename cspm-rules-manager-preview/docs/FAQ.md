@@ -44,11 +44,35 @@ reopens and how many runs remain, but for a migration of hundreds of groups the 
 answer is to have the tenant administrator raise the limit before the day. With the
 limit raised, creation runs at about 10 s per exception.
 
+**Does it manage correlation rules as well as posture rules?**
+Yes, from the same workbook. Translated IAM, audit-event and network policies arrive
+marked as correlation rules; `correlation --update` creates or updates them and
+`cortex --update` leaves those rows alone. `correlation --collect` exports what is on
+the tenant in the same layout.
+
+**How do I stop correlation rules alerting on our own scanners?**
+With the allowlist: two lookup datasets, IPs and identities, that the rules read at run
+time. You manage them from a workbook, entries can expire, and changing the allowlist
+does not mean editing or redeploying a single rule. The trade-off is that a rule
+reading the allowlist runs Scheduled, hourly, not Real-time.
+
+**Does the tool ship with a list of addresses it allowlists?**
+Not inside the binary. A seed file of vendor scanner and platform addresses ships
+beside it as a CSV; you decide whether to load it, which sources and regions to take,
+and you can edit it. Nothing reaches the tenant until you have reviewed the workbook.
+
+**Exception, exclusion, allowlist: which is which?**
+An issue exception suppresses posture issues for specific resources and expires. An
+issue exclusion rule silences a whole rule permanently. The allowlist keeps correlation
+rules from alerting on known-good sources. Three different Cortex mechanisms; the tool
+keeps the three names apart on purpose.
+
 **What permissions does it need?**
 Prisma: read for `--collect`, policy write for `--update` / `--create-standard`,
 alerts read for `exceptions --collect`. Cortex: a standard or advanced API key with
 rule read / write and compliance management; issue-exception management for
-`exceptions --update`. Exact roles in the private repository's SECURITY.md.
+`exceptions --update`; correlation rule and lookup dataset management for `correlation`
+and `allowlist`. Exact roles in the private repository's SECURITY.md.
 
 **Does it need Python?**
 No. It ships as a binary for macOS (arm64) and Linux (x86_64) with an installation

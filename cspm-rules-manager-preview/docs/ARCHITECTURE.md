@@ -7,6 +7,8 @@ flowchart TB
     CLI --> C[cortex]
     CLI --> A[appsec]
     CLI --> E[exceptions]
+    CLI --> CO[correlation]
+    CLI --> AL[allowlist]
 
     subgraph Shared
         CFG[Credential resolution<br/>~/.config/panw/&lt;customer&gt;.ini]
@@ -19,8 +21,12 @@ flowchart TB
     A --> AM[pair · generate YAML<br/>validate · resolve ids]
     E --> EX[collect dismissed/snoozed<br/>resolve policy→rule<br/>create idempotently]
 
-    PC & CC & AM & EX --> WB
-    PC & CC & EX --> HTTP
+    CO --> COR[collect · update<br/>mode selection<br/>allowlist stages in XQL]
+    AL --> ALM[collect · seed file · update<br/>two lookup datasets]
+    COR -. reads .-> ALM
+
+    PC & CC & AM & EX & COR & ALM --> WB
+    PC & CC & EX & COR & ALM --> HTTP
     CFG --> HTTP
     HTTP --> PAPI[(Prisma Cloud API)]
     HTTP --> XAPI[(Cortex public API)]
@@ -31,10 +37,11 @@ flowchart TB
 
 ## Design points
 
-- **One binary, four subcommands.** Earlier there were three repos and three scripts
+- **One binary, six subcommands.** Earlier there were three repos and three scripts
   (Prisma manager, Cortex manager, IaC manager) sharing most of their code and all of
   their config; they were merged in October 2026 and the exceptions subcommand added
-  in November. The translator stays a separate binary because its release cadence is
+  in November. Correlation rules and their allowlist followed in 1.2, replacing a set of
+  one-off scripts: correlation rules now live in the same workbook as every other rule. The translator stays a separate binary because its release cadence is
   different. The test pipeline stays a script because it needs Terraform and the cloud
   CLIs beside it.
 - **Workbook as the review surface.** Every write to a tenant reads from a workbook
@@ -61,6 +68,8 @@ exists to handle. Stated here at the level a user needs; the handling is private
 | Cortex compliance standards | Two compliance APIs coexist: a hierarchical one whose standards are invisible to the other and cannot be mapped to rules, and a flat one (controls with category / subcategory) that rules map to but which cannot create new categories | Uses the flat API so created standards are usable for rule mapping; matches template rows to existing categories; names controls so the same text appears on both platforms |
 | Cortex rule creation | The rule API accepts a narrower set of asset-type identifiers than the dataset exposes, and some constructs are refused at creation despite running as queries | Validates through the test rule first; reports refusals per row with the API reason |
 | Issue exceptions | A default tenant quota of roughly 10 exception creations per rolling 24 h (measured, not per calendar day); some resource types are excluded; renamed policies need fuzzy name matching | Computes when the window reopens from timestamps in the workbook and how many runs remain; chunks assets per exception; `--strip-prefix` and name-map for renamed policies; recommends raising the quota with the tenant administrator before migration day |
+| Correlation rules and lookups | A filter of the form `field not in (lookup)` silently drops rows where the field is empty; a rule that reads a lookup is refused as Real-time; an empty lookup makes every form return all rows; regular-expression entries need a join, not a sub-query | Writes a null-safe filter for IPs, an exact filter plus a pattern join for identities, puts expiry inside the sub-query, deploys allowlisted rules as Scheduled with window equal to schedule, and warns on an empty dataset |
+| Issue exclusion rules | The exclusion API accepts no asset field in a condition, so an exclusion can only cover a whole rule | Offered as an explicit alternative mechanism, created disabled on request, with the wider scope stated before anything is created |
 | Prisma policy export | Custom policies, saved searches and standard mappings live behind separate calls with different paging | One collect produces one row per policy with everything a review needs |
 
 ## What is public vs private

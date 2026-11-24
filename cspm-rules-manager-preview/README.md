@@ -1,4 +1,4 @@
-# cspm-rules-manager — one CLI for Prisma Cloud policies, Cortex Cloud rules and AppSec rules
+# cspm-rules-manager — one CLI for Prisma Cloud policies, Cortex Cloud posture and correlation rules, allowlists and AppSec rules
 
 > **Preview repository.** Documentation, CLI reference, architecture and sample output.
 > Binaries are in the private repository — see
@@ -18,7 +18,7 @@ doing it from ad-hoc scripts does not survive the second tenant.
 
 ## What cspm-rules-manager does
 
-One binary, four subcommands, one workbook convention. Every change to a tenant goes
+One binary, six subcommands, one workbook convention. Every change to a tenant goes
 through a workbook a human has reviewed.
 
 | Subcommand | Side | Does |
@@ -26,7 +26,9 @@ through a workbook a human has reviewed.
 | `prisma` | Prisma Cloud | Export every policy of a custom standard with its RQL, mode, labels, saved search and standard mapping; create / update custom policies and saved searches; map to standards; create a custom standard from a template workbook |
 | `cortex` | Cortex Cloud | Export CSPM and AppSec rules of a custom standard with their compliance mapping; create / patch / map / label rules — **every XQL validated through a dedicated test rule first**; create a custom standard and its controls from the same template |
 | `appsec` | Cortex Cloud | Pair translated CSPM rules with existing AppSec IaC rules (by name, then asset type + keywords) or generate Checkov-style YAML from the XQL; validate; resolve rule-id placeholders after deployment |
-| `exceptions` | both | Carry Prisma alert exceptions (dismissed / snoozed) to Cortex issue exceptions: collect, resolve policy → rule, review, create idempotently — with the tenant's creation quota measured and planned around |
+| `exceptions` | both | Carry Prisma alert exceptions (dismissed / snoozed) to Cortex issue exceptions: collect, resolve policy → rule, review, create idempotently — with the tenant's creation quota measured and planned around. Optionally creates whole-rule issue exclusion rules instead |
+| `correlation` | Cortex | Correlation rules from the same rules workbook: the translated IAM, audit-event and network policies, or an export of the tenant's rules. Creates and updates them, chooses Real-time or Scheduled, and writes the filters that read the allowlist |
+| `allowlist` | Cortex | Known-good IPs and identities that correlation rules ignore, kept in two lookup datasets and managed from a workbook with `ADD` / `REMOVE`, expiry dates and an optional seed file of vendor scanner addresses |
 
 A companion **rule test pipeline** (Terraform fixtures for AWS / Azure / GCP + runner)
 provisions a deliberately misconfigured resource in a lab account, confirms the
@@ -37,6 +39,8 @@ cspm-rules-manager prisma      --collect | --update | --create-standard   --conf
 cspm-rules-manager cortex      --collect | --update | --create-standard   --config <customer>.ini
 cspm-rules-manager appsec      --cspm-excel … --appsec-excel … --output …  [--validate | --resolve-cspm-ids]
 cspm-rules-manager exceptions  --collect | --update [--dry-run]           --config <customer>.ini
+cspm-rules-manager correlation --collect | --update [--dry-run]           --config <customer>.ini
+cspm-rules-manager allowlist   --collect [--seed-file <csv>] | --update [--dry-run]  --config <customer>.ini
 ```
 
 Run any subcommand without an action flag for a numbered menu.
@@ -49,6 +53,8 @@ Measured in November 2026 on lab tenants (Cortex Cloud 2.2 and 2.3).
 |---|---|---|
 | Collect a custom standard's Cortex rules with mapping, one tenant | 4,653 rules (2,633 CSPM, plus IaC, secrets and CI/CD) | about 2 min |
 | Create a custom compliance standard and its controls from the template | 65 controls in 31 new categories | 2-4 min |
+| Correlation rules created from the rules workbook, with all three allowlist stages | 36 of 36 rows deployed, 0 failed | one run |
+| Allowlist seeded from the shipped seed file of vendor scanner and platform addresses | 366 addresses, six role-name patterns | one run |
 | Alert exceptions → issue exceptions, lab migration | 39 dismissed alerts in 20 rule-account groups | 2 runs a day apart (the tenant allows 10 creations per rolling 24 h); ~10 s per exception, 10 in 3.7 min |
 
 ## Where it fits
@@ -58,6 +64,10 @@ Prisma policies ──prisma --collect──► workbook ──rql2xql──► 
        │                                  │                                        │
        │                                  └──appsec──► Checkov rules               └──test pipeline──► fires? ✓
        └──exceptions --collect──► review ──exceptions --update──► Cortex issue exceptions
+
+IAM / event / network policies ──rql2xql──► same workbook ──correlation --update──► Cortex correlation rules
+                                                                    ▲ reads
+                    allowlist --collect --seed-file ──► review ──allowlist --update──► lookup datasets
 ```
 
 `cspm-rules-manager` is the collection, deployment and testing half; translation is
@@ -95,11 +105,11 @@ deployment or migration. See [ACCESS.md](../ACCESS.md).
 | Repo | What it is |
 |---|---|
 | [rql2xql-preview](https://github.com/neocortex-security/cortex-security-automation/tree/main/rql2xql-preview) | Prisma Cloud RQL → Cortex Cloud XQL translator with live validation |
-| [cspm-rules-manager-preview](https://github.com/neocortex-security/cortex-security-automation/tree/main/cspm-rules-manager-preview) | One CLI to collect, update and create Prisma policies, Cortex rules and AppSec rules |
+| [cspm-rules-manager-preview](https://github.com/neocortex-security/cortex-security-automation/tree/main/cspm-rules-manager-preview) | One CLI for Prisma policies, Cortex posture and correlation rules, allowlists, exceptions and AppSec rules |
 | [cspm-rules-preview](https://github.com/neocortex-security/cortex-security-automation/tree/main/cspm-rules-preview) | Consolidated, validated CSPM rule library for Cortex Cloud |
 | [cortex-cloud-terraform-preview](https://github.com/neocortex-security/cortex-security-automation/tree/main/cortex-cloud-terraform-preview) | Provisions the managed security service framework for a Cortex Cloud tenant, as code |
 | [prisma-asset-reporter-preview](https://github.com/neocortex-security/cortex-security-automation/tree/main/prisma-asset-reporter-preview) | Per-asset compliance findings and vulnerabilities from Prisma Cloud, cross-cloud, by asset type or custom RQL |
-| [cortexcloud-sentinel-preview](https://github.com/neocortex-security/cortex-security-automation/tree/main/cortexcloud-sentinel-preview) | Microsoft Sentinel → AWS (OpenSearch + Grafana) data pipeline |
+| [cortexcloud-sentinel-preview](https://github.com/neocortex-security/cortex-security-automation/tree/main/cortexcloud-sentinel-preview) | Cortex Cloud in your SIEM: Microsoft Sentinel solution and its AWS OpenSearch + Grafana counterpart |
 
 ---
 

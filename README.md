@@ -19,7 +19,7 @@ documentation in a private repository.
 | Tool | One line | Stage |
 |---|---|---|
 | [**rql2xql**](rql2xql-preview/) | Translates Prisma Cloud RQL policies to Cortex Cloud XQL and **validates every translation against live tenants** — populations, not counts — with every disagreement classified | 2.32.x, production on <<N>> client corpora |
-| [**cspm-rules-manager**](cspm-rules-manager-preview/) | One binary to export, create, update and map Prisma policies, Cortex rules, custom compliance standards and AppSec IaC rules from reviewed workbooks; carries alert exceptions over to issue exceptions | 1.1.x |
+| [**cspm-rules-manager**](cspm-rules-manager-preview/) | One binary to export, create, update and map Prisma policies, Cortex posture rules, correlation rules, custom compliance standards and AppSec IaC rules from reviewed workbooks; manages the allowlist that correlation rules read; carries alert exceptions over to issue exceptions | 1.2.1 |
 | [**cspm-rules**](cspm-rules-preview/) | A consolidated, validated library of Cortex Cloud posture and correlation rules — the long tail of custom controls that default rule sets do not cover | 1000+ rules |
 | [**cortex-cloud-terraform**](cortex-cloud-terraform-preview/) | Provisions the managed security service framework for a Cortex Cloud tenant, as code: onboarding, asset groups, standards, rules, exceptions, integrations — idempotent, with drift detection | v3.3 |
 | [**prisma_asset_reporter**](prisma-asset-reporter-preview/) | Per-asset compliance findings and vulnerabilities from Prisma Cloud across 13 asset types and every cloud, at scale, exported anywhere Polars can write | v1.3 |
@@ -36,13 +36,14 @@ flowchart LR
     end
     subgraph Tools
         R[rql2xql<br/>translate · validate]
-        M[cspm-rules-manager<br/>collect · update · create · exceptions]
+        M[cspm-rules-manager<br/>collect · update · create<br/>correlation · allowlist · exceptions]
         L[cspm-rules<br/>validated library]
         T[cortex-cloud-terraform<br/>tenant as code]
         P[prisma_asset_reporter<br/>baseline collector]
     end
     subgraph Cortex[Cortex Cloud tenant]
-        CR[Posture + correlation rules]
+        CR[Posture rules]
+        CC[Correlation rules<br/>+ allowlist lookups]
         CS[Custom standards]
         CE[Issue exceptions]
         CT[Onboarding · groups · integrations]
@@ -51,6 +52,7 @@ flowchart LR
 
     PP -->|prisma --collect| M --> R
     R -->|validated XQL| M -->|cortex --update| CR
+    M -->|correlation --update| CC
     M -->|--create-standard| CS
     PA -->|exceptions| M --> CE
     L -->|cortex --update| CR
