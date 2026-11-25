@@ -33,15 +33,15 @@ Counts as of November 2026: the rules in the library that deploy on a Cortex Clo
 
 | Cloud | Posture rules | Correlation rules | Asset types covered | Last validated |
 |---|---|---|---|---|
-| AWS | 512 | 0 | 350 | 2026-10 |
-| Azure | 299 | 0 | 239 | 2026-10 |
-| GCP | 215 | 0 | 98 | 2026-10 |
+| AWS | 514 | 0 | 350 | 2026-11 |
+| Azure | 301 | 0 | 241 | 2026-11 |
+| GCP | 215 | 0 | 98 | 2026-11 |
 | OCI | 17 | 0 | 17 | 2026-10 |
 | Alibaba | 1 | 0 | 1 | 2026-10 |
 | Kubernetes | — | — | — | — |
-| **Total** | **1,044** | **0** | **701** | |
+| **Total** | **1,048** | **0** | **703** | |
 
-Of the 1,044, 88 deploy cleanly but could not be checked against a population, because the
+Of the 1,048, 88 deploy cleanly but could not be checked against a population, because the
 validation tenants hold no assets of that type (AWS 28, Azure 25, GCP 20, OCI 14, Alibaba 1).
 Kubernetes-API checks and correlation rules are not part of this release.
 
@@ -50,14 +50,16 @@ exported through the rule API in November 2026):
 
 | Cloud | Library rules | Cortex default rules | Asset types, library | Asset types, defaults | Library asset types with no default rule |
 |---|---|---|---|---|---|
-| AWS | 512 | 382 | 350 | 112 | 256 |
-| Azure | 299 | 285 | 239 | 64 | 185 |
+| AWS | 514 | 382 | 350 | 112 | 256 |
+| Azure | 301 | 285 | 241 | 64 | 187 |
 | GCP | 215 | 213 | 98 | 45 | 69 |
 | OCI | 17 | 66 | 17 | 23 | 10 |
 | Alibaba | 1 | 48 | 1 | 11 | 0 |
-| **Total** | **1,044** | **994** | **701** | **255** | **515** |
+| **Total** | **1,048** | **994** | **703** | **255** | **517** |
 
-Severity, library vs defaults: High 153 vs 106, Medium 455 vs 405, Low 436 vs 177,
+An asset type counts once in the total, so the per-cloud figures in the last column do not add up to it.
+
+Severity, library vs defaults: High 155 vs 106, Medium 457 vs 405, Low 436 vs 177,
 Informational 0 vs 306.
 
 By control family — see [docs/CATALOGUE.md](docs/CATALOGUE.md) for the full list with
@@ -65,14 +67,14 @@ one line per rule (name, cloud, asset type, severity, framework mappings, status
 
 | Family | Rules |
 |---|---|
-| Logging & monitoring | 110 |
+| Logging & monitoring | 111 |
 | Encryption & key management | 167 |
-| Network exposure | 194 |
-| Identity & access | 156 |
-| Tagging, naming, governance | 142 |
+| Network exposure | 193 |
+| Identity & access | 157 |
+| Tagging, naming, governance | 144 |
 | Backup & resilience | 47 |
 | Data services (DB, storage, queues) | 82 |
-| Compute & containers | 65 |
+| Compute & containers | 66 |
 | AI services | 81 |
 
 ## What "validated" means

@@ -32,6 +32,11 @@ and miss on population.
 5. **Deploys** validated rules to Cortex Cloud as posture rules or correlation rules
    according to the policy type. Correlation rules go out through
    [cspm-rules-manager](../cspm-rules-manager-preview/) from the same workbook.
+6. **Reuses a translated policy set on another tenant.** Estate-specific values (account,
+   subscription and organisation ids, approved regions, tag keys and values, bucket, trail,
+   network and role names, IP ranges) are replaced by named placeholders; a per-tenant
+   values file fills them back in, and the filled set is translated and counted on the new
+   tenant like any other batch.
 
 ## Results
 
